@@ -1,4 +1,4 @@
-import { Fab } from "@mui/material";
+import { Fab, Typography } from "@mui/material";
 import React from "react";
 import EastIcon from '@mui/icons-material/East';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -14,7 +14,11 @@ const Home=  props=>{
 
     return (
       <div className="fullContainer">
-        <img src={logo} />
+        <div className="label">
+           <img src={logo} />
+          <Typography variant="h4">SOC Transport</Typography>
+        </div>
+        
         <div className="buttonHolder">
           <Fab variant="extended" onClick={() => navigate("SignIn")}>
             <EastIcon sx={{ mr: 1 }} />
