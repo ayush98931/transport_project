@@ -5,12 +5,17 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useNavigate } from "react-router";
 import '../../assets/css/signInReg.scss'
 import logo from '../../assets/images/logo.png'
+import { theme } from "../../constants";
+import { useSelector } from "react-redux";
+import { showToaster } from "../../utility";
 
 
 
 const Home=  props=>{
 
     const navigate = useNavigate();
+    console.log(theme);
+    useSelector(state=>console.log(state));
 
     return (
       <div className="fullContainer">
@@ -20,11 +25,19 @@ const Home=  props=>{
         </div>
         
         <div className="buttonHolder">
-          <Fab variant="extended" onClick={() => navigate("SignIn")}>
+          <Typography fontSize={15}>Existing User</Typography>
+          <Fab variant="extended" onClick={() =>{ 
+              showToaster("info","Sign in page");
+              navigate("SignIn");
+             }}>
             <EastIcon sx={{ mr: 1 }} />
             Sign in
           </Fab>
-          <Fab variant="extended" onClick={() => navigate("Register")}>
+          <Typography fontSize={15}>New User</Typography>
+          <Fab variant="extended" onClick={() =>{
+              showToaster("info" , "Register page");
+              navigate("Register");
+             }}>
             <ExitToAppIcon sx={{ mr: 1 }} />
             Register
           </Fab>

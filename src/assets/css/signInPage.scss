@@ -1,0 +1,12 @@
+@use './signInReg.scss' as screen;
+
+div.fullSizeContainer{
+    @include screen.fullScreenContainer();
+    justify-content: center;
+
+    .signInFrom{
+        max-width: 500px;
+        padding: 50px 20px;
+    }
+
+}

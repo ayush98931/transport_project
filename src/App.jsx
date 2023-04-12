@@ -5,8 +5,11 @@ import {
 } from "react-router-dom";
 import * as lazy from './lazyLoaded';
 import Loader from './components/loader';
-import { ThemeProvider } from '@emotion/react';
 import { theme } from './constants';
+import Toaster from './components/utility/toaster';
+import { Provider } from 'react-redux';
+import store from './redux/reduxStore';
+import { Box, ThemeProvider } from '@mui/material';
 // import { router } from './constants';
 
 
@@ -37,12 +40,15 @@ function App() {
  ])
 
   return (
-    <ThemeProvider theme={theme}>
-    <div className="App">
-    <RouterProvider router={router} />
-    </div>
-    </ThemeProvider>
-  )
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Box className="App">
+          <RouterProvider router={router} />
+          <Toaster />
+        </Box>
+      </ThemeProvider>
+    </Provider>
+  );
 }
 
 export default App
