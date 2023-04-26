@@ -1,8 +1,36 @@
 import { createTheme } from "@mui/material";
 
+export const ToastType = {
+    info : 'info',
+    success : 'success',
+    warning : 'warning',
+    error : 'error'
+}
+
+export const userType = {
+    client : "CLIENT",
+    tranporter : "TRANSPORTER"
+}
+
+export const googleCreds = {
+    clinetId : "977451559774-c7eb80kljfkvt24ks1tm0id9cvo5t6v9.apps.googleusercontent.com"
+}
+
+export const baseURL = "http://localhost:8000/"
+
+export const APIurls = {
+    common : `${baseURL}common/`,
+    client : `${baseURL}client/`,
+    tranporter : `${baseURL}tranporter/`,
+}
+
+
 export const theme = createTheme({
     palette:{
         mode:window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light',
+        primary:{
+            main:"#175a88",
+        }
     },
     status:{
         danger:"red",
@@ -42,6 +70,13 @@ export const theme = createTheme({
             styleOverrides:{
                 root:{
                     borderRadius:"10px",
+                }
+            }
+        },
+        MuiButton:{
+            styleOverrides:{
+                root:{
+                    outline:"none!important"
                 }
             }
         }

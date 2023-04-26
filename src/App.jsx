@@ -5,13 +5,16 @@ import {
 } from "react-router-dom";
 import * as lazy from './lazyLoaded';
 import Loader from './components/loader';
-import { theme } from './constants';
+import { googleCreds, theme } from './constants';
 import Toaster from './components/utility/toaster';
 import { Provider } from 'react-redux';
 import store from './redux/reduxStore';
 import { Box, ThemeProvider } from '@mui/material';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { QueryClient, QueryClientProvider } from 'react-query';
 // import { router } from './constants';
 
+const queryClinet = new QueryClient();
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,7 +42,10 @@ function App() {
   
  ])
 
+  console.log(theme);
   return (
+    <QueryClientProvider client={queryClinet}>
+    <GoogleOAuthProvider clientId={googleCreds.clinetId}>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Box className="App">
@@ -48,6 +54,8 @@ function App() {
         </Box>
       </ThemeProvider>
     </Provider>
+    </GoogleOAuthProvider>
+    </QueryClientProvider>
   );
 }
 
