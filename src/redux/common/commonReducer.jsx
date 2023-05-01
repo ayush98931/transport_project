@@ -1,7 +1,8 @@
 import commonActionTypes from "./commonAction";
 
 const initial_state = {
-    ToasterList : []
+    ToasterList : [],
+    TemporaryData : {}
 };
 
 
@@ -20,6 +21,20 @@ export default function commonReducer(state=initial_state , action){
             return {
                 ...state,
                 ToasterList:list
+            };
+        case commonActionTypes.addTemporaryData:
+            let temp_tempData = state.TemporaryData;
+            temp_tempData[action.payload.name] = action.payload.value;
+            return {
+                ...state,
+                TemporaryData : temp_tempData
+            };
+        case commonActionTypes.removeTemporaryData:
+            let temp_rm_data = state.TemporaryData;
+            delete temp_rm_data[action.payload]
+            return {
+                ...state,
+                TemporaryData : temp_rm_data
             };
         default:
             return state;

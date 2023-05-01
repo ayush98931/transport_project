@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Box, Button, CircularProgress, Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Divider, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, Paper, Stack, Tab, Tabs, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import '../../../assets/css/signInPage.scss';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -11,7 +11,14 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { ToastType, userType } from "../../../constants";
 import { useNavigate } from "react-router";
-import { Form } from "formik";
+import { Form, Formik } from "formik";
+import { signInValidation } from "../../../validation";
+
+
+const initial_values={
+  email:'',
+  password:'',
+}
 
 const SignInPage = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,11 +47,28 @@ const SignInPage = (props) => {
                     navigate("../register");
                   }
                       
+                }).catch(error=>{
+                  if(error.reponse.data.error)showToaster(ToastType.error ,error.resposne.data.msg)
                 })
     ;
   });
 
-  const loginUser =data=>{
+  const mutaionManual = useMutation(values=>{
+    console.log("manual" , values);
+    return axios.post(APIs.sign_in_manual , values)
+                .then(res=>{
+                  console.log(res.data);
+                  if (res.data.error )showToaster(ToastType.error, res.data.msg )
+                  else{ 
+                    if (res.data.msg )showToaster(ToastType.success, res.data.msg );
+                    navigate("../register");
+                  }
+                }).catch(error=>{
+                  if(error.response.data.error)showToaster(ToastType.error ,error.response.data.msg)
+                })
+  })
+
+  const loginGoogleUser =data=>{
     showToaster("info" , "Google verified");
     mutationGoogle.mutate({user_type : tab === "0"?userType.client:userType.tranporter,
     ...data
@@ -56,8 +80,14 @@ const SignInPage = (props) => {
   const loginWithGoogle = useGoogleLogin({
     scope: "openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
     flow: "implicit",
-    onSuccess: loginUser
+    onSuccess: loginGoogleUser
+
+
   });
+
+  const loginManual= values=>{
+    mutaionManual.mutate({...values , user_type : tab === "0"?userType.client:userType.tranporter})
+  }
 
   return (
     <div className="fullSizeContainer">
@@ -78,16 +108,26 @@ const SignInPage = (props) => {
           </Box>
         </Box>
 
+        <Formik initialValues={initial_values} onSubmit={loginManual} validationSchema={signInValidation}>
+
+            {props=>{
+            return (
+
         <Form>
         <Stack spacing={3} className="signInFrom">
           <TextField
             variant="outlined"
             label="Email"
             type="email"
+            name="email"
             size="small"
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            helperText={props.touched.email && props.errors.email}
+            error={Boolean(props.touched.email && props.errors.email)}
           />
 
-          <FormControl variant="outlined" size="small">
+          <FormControl variant="outlined" size="small" error={Boolean(props.touched.password && props.errors.password)}>
             <InputLabel htmlFor="sign_in_password">Password</InputLabel>
             <OutlinedInput
               id="sign_in_password"
@@ -109,7 +149,11 @@ const SignInPage = (props) => {
                 </InputAdornment>
               }
               label="Password"
-            />
+              name="password"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              />
+              <FormHelperText>{props.touched.password && props.errors.password}</FormHelperText>
           </FormControl>
 
           <Button variant="outlined" type="submit" className="submitButton">
@@ -124,6 +168,10 @@ const SignInPage = (props) => {
           </Box>
         </Stack>
           </Form>
+
+            )}
+          }
+      </Formik>
       </Paper>
     </div>
   );
