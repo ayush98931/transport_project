@@ -39,6 +39,13 @@ function App() {
                     <lazy.RegisterPage />
                 </Suspense>),
     },
+    {
+      index:true,
+      path:"Dashboard",
+      element:(<Suspense fallback={<Loader />}>
+                    <lazy.ClientDashboard />
+                </Suspense>),
+    },
   
  ])
 
