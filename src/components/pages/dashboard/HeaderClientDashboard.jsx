@@ -34,28 +34,28 @@ export default function Header() {
             SOC TRANSPORT
           </Typography>
           <MenuItem >
-          <Avatar /> Profile
-        </MenuItem>
+            <Avatar /> Profile
+          </MenuItem>
         
-        <Divider />
-        <MenuItem >
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem >
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem >
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+          <Divider />
+          <MenuItem >
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Add another account
+          </MenuItem>
+          <MenuItem >
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+          <MenuItem >
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
         </Toolbar>
       </AppBar>
   );
