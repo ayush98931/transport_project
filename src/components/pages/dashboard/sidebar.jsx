@@ -21,8 +21,32 @@ import InfoIcon from '@mui/icons-material/Info';
 import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import { useNavigate } from 'react-router';
 
 const drawerWidth = 240;
+
+const clientMenuOptions = [
+  {
+    path:'./Dashboard',
+    icon:<LocalConvenienceStoreIcon />,
+    label: 'Dashboard'
+  },
+  {
+    path:'./MyLoads',
+    icon:<LocalConvenienceStoreIcon />,
+    label: 'My Loads'
+  },
+  {
+    path:'./MyLories',
+    icon:<LocalConvenienceStoreIcon />,
+    label: 'My Lories'
+  },
+  {
+    path:'./Marketplace',
+    icon:<LocalConvenienceStoreIcon />,
+    label: 'Marketplace'
+  },
+]
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -69,7 +93,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -80,6 +104,8 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -120,13 +146,14 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Dashboard', 'MyLoads', 'MYLories', 'MarketPlace'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {clientMenuOptions.map((item, index) => (
+            <ListItem key={index} disablePadding onClick={()=>navigate(item.path)}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <DashboardIcon /> : <LocalConvenienceStoreIcon />}
+
+                  {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -147,12 +174,12 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography paragraph>
-          Hey, I am ayush presenting my project on transport management system.
+        {props.children?props.children:(<><Typography variant='h4'>
+          👋 Hey, I am ayush presenting my project on transport management system.
         </Typography>
         <Typography paragraph>
           This is a dashboard page.
-        </Typography>
+        </Typography></>)}
       </Main>
     </Box>
   );

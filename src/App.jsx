@@ -39,13 +39,46 @@ function App() {
                     <lazy.RegisterPage />
                 </Suspense>),
     },
+
     {
-      index:true,
-      path:"Dashboard",
+      // index : true,
+      path:"WorkSpace",
       element:(<Suspense fallback={<Loader />}>
-                    <lazy.ClientDashboard />
-                </Suspense>),
+                  <lazy.RootPage />
+              </Suspense>), 
+      children:[
+        {
+        index:true,
+        path:"Dashboard",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.Dashboard />
+                  </Suspense>),
+        },
+        {
+        index:true,
+        path:"MyLoads",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.MyLoads />
+                  </Suspense>),
+        },
+        {
+        index:true,
+        path:"MyLories",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.MyLories />
+                  </Suspense>),
+        },
+        {
+        index:true,
+        path:"Marketplace",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.MarketPlace />
+                  </Suspense>),
+        },
+      ]
     },
+
+    
   
  ])
 

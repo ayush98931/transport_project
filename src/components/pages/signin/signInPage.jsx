@@ -44,7 +44,7 @@ const SignInPage = (props) => {
                   if (res.data.error )showToaster(ToastType.error, res.data.msg )
                   else{ 
                     if (res.data.msg )showToaster(ToastType.success, res.data.msg );
-                    navigate("../Dashboard");
+                    navigate("../WorkSpace/Dashboard");
                   }
                       
                 }).catch(error=>{
