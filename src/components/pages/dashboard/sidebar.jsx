@@ -21,7 +21,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -106,6 +106,7 @@ export default function PersistentDrawerLeft(props) {
   };
   
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -174,7 +175,7 @@ export default function PersistentDrawerLeft(props) {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {props.children?props.children:(<><Typography variant='h4'>
+        {location.pathname !== '/WorkSpace/'?props.children:(<><Typography variant='h4'>
           👋 Hey, I am ayush presenting my project on transport management system.
         </Typography>
         <Typography paragraph>
