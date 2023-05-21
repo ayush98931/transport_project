@@ -2,7 +2,8 @@ import commonActionTypes from "./commonAction";
 
 const initial_state = {
     ToasterList : [],
-    TemporaryData : {}
+    TemporaryData : {},
+    UserInfo : {},
 };
 
 
@@ -36,6 +37,11 @@ export default function commonReducer(state=initial_state , action){
                 ...state,
                 TemporaryData : temp_rm_data
             };
+        case commonActionTypes.storeUserInfo:
+            return {
+                ...state,
+                UserInfo : action.payload
+            }
         default:
             return state;
     }

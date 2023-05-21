@@ -19,34 +19,58 @@ import ListItemText from '@mui/material/ListItemText';
 import Person2Icon from '@mui/icons-material/Person2';
 import InfoIcon from '@mui/icons-material/Info';
 import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useLocation, useNavigate } from 'react-router';
+import { Dashboard, FireTruckRounded, GifBoxRounded, Logout, Route, StoreMallDirectory } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
 const clientMenuOptions = [
   {
-    path:'./Dashboard',
-    icon:<LocalConvenienceStoreIcon />,
+    path:'/WorkSpace/Dashboard',
+    icon:<Dashboard />,
     label: 'Dashboard'
   },
   {
-    path:'./MyLoads',
-    icon:<LocalConvenienceStoreIcon />,
+    path:'/WorkSpace/MyLoads',
+    icon:<FireTruckRounded />,
     label: 'My Loads'
   },
   {
-    path:'./MyLories',
-    icon:<LocalConvenienceStoreIcon />,
+    path:'/WorkSpace/MyLories',
+    icon:<GifBoxRounded />,
     label: 'My Lories'
   },
   {
-    path:'./Marketplace',
-    icon:<LocalConvenienceStoreIcon />,
+    path:'/WorkSpace/Marketplace',
+    icon:<StoreMallDirectory />,
     label: 'Marketplace'
   },
 ]
+
+const commonMenuOptions = [
+  {
+    path:'/WorkSpace/MyRoutes',
+    icon:<Route />,
+    label: 'My Routes'
+  },
+  {
+    path:'/WorkSpace/AboutCompany',
+    icon:<InfoIcon />,
+    label: 'About Company'
+  },
+  {
+    path:'/WorkSpace/Profile',
+    icon:<Person2Icon />,
+    label: 'Profile'
+  },
+  {
+    path:'/Logout',
+    icon:<Logout />,
+    label: 'Logout'
+  },
+]
+
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -127,6 +151,7 @@ export default function PersistentDrawerLeft(props) {
           </Typography>
         </Toolbar>
       </AppBar>
+      
       <Drawer
         sx={{
           width: drawerWidth,
@@ -161,18 +186,19 @@ export default function PersistentDrawerLeft(props) {
         </List>
         <Divider />
         <List>
-          {['MyRoutes', 'AboutCompany', 'Profile'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {commonMenuOptions.map((item, index) => (
+            <ListItem key={index} disablePadding onClick={()=>navigate(item.path)}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <Person2Icon /> : <InfoIcon />}
+                  {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
+      
       <Main open={open}>
         <DrawerHeader />
         {location.pathname !== '/WorkSpace/'?props.children:(<><Typography variant='h4'>

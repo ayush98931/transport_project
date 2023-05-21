@@ -3,6 +3,7 @@ const commonActionTypes = {
     remove_toaster : 'remove_toaster',
     addTemporaryData : 'add_temporary_data',
     removeTemporaryData : 'remove_temporary_data',
+    storeUserInfo: 'store_user_info'
 
 }
 
@@ -30,6 +31,13 @@ export function addTemporaryDataAction(value){
 export function removeTemporaryDataAction(value){
     return ({
         type : commonActionTypes.removeTemporaryData,
+        payload : value
+    })
+}
+
+export function storeUserInfoAction(value){
+    return({
+        type : commonActionTypes.storeUserInfo,
         payload : value
     })
 }
