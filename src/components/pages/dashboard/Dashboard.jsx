@@ -1,4 +1,5 @@
 import * as React from "react";
+import { IsLoggedIn } from "../root";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -20,6 +21,7 @@ import Tabs from "@mui/material/Tabs";
 
 export default function ClientDashboard() {
   return (
+    <IsLoggedIn>
     <div>
       <React.Fragment>
         <AppBar color="primary" position="sticky" elevation={0}>
@@ -163,5 +165,6 @@ export default function ClientDashboard() {
         </Typography>
       </Paper>
     </div>
+    </IsLoggedIn>
   );
 }

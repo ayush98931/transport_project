@@ -1,3 +1,5 @@
+import { IsLoggedIn } from "../root";
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -70,8 +72,10 @@ export default function MyLoads() {
   };
 
   return (
+        <IsLoggedIn>
     <div>
       <h1>My Loads</h1>
+        </IsLoggedIn>
       <br />
       <Fab variant="extended">
         Listing

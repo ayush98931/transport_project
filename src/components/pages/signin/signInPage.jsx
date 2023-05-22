@@ -13,6 +13,9 @@ import { ToastType, userType } from "../../../constants";
 import { useNavigate } from "react-router";
 import { Form, Formik } from "formik";
 import { signInValidation } from "../../../validation";
+import { storeUserInfoAction } from "../../../redux/common/commonAction";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 
 const initial_values={
@@ -41,10 +44,11 @@ const SignInPage = (props) => {
     return axios.post(APIs.sign_in_with_google , values)
                 .then(res=>{
                   console.log(res.data);
+                  props.storeUserInfo(res.data)
                   if (res.data.error )showToaster(ToastType.error, res.data.msg )
                   else{ 
                     if (res.data.msg )showToaster(ToastType.success, res.data.msg );
-                    navigate("../WorkSpace/Dashboard");
+                    navigate("../WorkSpace/");
                   }
                       
                 }).catch(error=>{
@@ -58,10 +62,11 @@ const SignInPage = (props) => {
     return axios.post(APIs.sign_in_manual , values)
                 .then(res=>{
                   console.log(res.data);
+                  props.storeUserInfo(res.data);
                   if (res.data.error )showToaster(ToastType.error, res.data.msg )
                   else{ 
                     if (res.data.msg )showToaster(ToastType.success, res.data.msg );
-                    navigate("../Dashborad");
+                    navigate("../WorkSpace/");
                   }
                 }).catch(error=>{
                   if(error.response.data.error)showToaster(ToastType.error ,error.response.data.msg)
@@ -177,4 +182,10 @@ const SignInPage = (props) => {
   );
 };
 
-export default SignInPage;
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    storeUserInfo : bindActionCreators(storeUserInfoAction , dispatch),
+  }
+}
+
+export default connect(null , mapDispatchToProps)(SignInPage);
