@@ -20,6 +20,7 @@ import Person2Icon from '@mui/icons-material/Person2';
 import InfoIcon from '@mui/icons-material/Info';
 import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import NearMeIcon from '@mui/icons-material/NearMe';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useNavigate } from 'react-router';
 
@@ -28,18 +29,13 @@ const drawerWidth = 240;
 const clientMenuOptions = [
   {
     path:'./Dashboard',
-    icon:<LocalConvenienceStoreIcon />,
+    icon:<DashboardIcon />,
     label: 'Dashboard'
   },
   {
     path:'./MyLoads',
-    icon:<LocalConvenienceStoreIcon />,
+    icon:<NearMeIcon />,
     label: 'My Loads'
-  },
-  {
-    path:'./MyLories',
-    icon:<LocalConvenienceStoreIcon />,
-    label: 'My Lories'
   },
   {
     path:'./Marketplace',
