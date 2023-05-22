@@ -36,11 +36,11 @@ const clientMenuOptions = [
     icon:<FireTruckRounded />,
     label: 'My Loads'
   },
-  {
-    path:'/WorkSpace/MyLories',
-    icon:<GifBoxRounded />,
-    label: 'My Lories'
-  },
+  // {
+  //   path:'/WorkSpace/MyLories',
+  //   icon:<GifBoxRounded />,
+  //   label: 'My Lories'
+  // },
   {
     path:'/WorkSpace/Marketplace',
     icon:<StoreMallDirectory />,

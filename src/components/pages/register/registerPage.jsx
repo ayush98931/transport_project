@@ -62,7 +62,7 @@ const RegisterPage=props=>{
             </Tabs>
           </Box>
         </Box>
-        {isFilled?<h1>hii</h1>:<WrapRegDetailForm tab={tab} set_isFilled={handleFilled} />}
+        <WrapRegDetailForm tab={tab} set_isFilled={handleFilled} />
       </Paper>
     </div>
     )}  
@@ -125,12 +125,15 @@ const RegisterPage=props=>{
 
   const mutationSendOTP = useMutation(()=>{
     showToaster(ToastType.info,"sending OTP");
-    return (axios.get(APIs.send_otp)
+    return (axios.post(APIs.register_manual , {
+      
+    })
     .then((res)=>{
       console.log(res);
-      showToaster(ToastType.success,"OTP sent successfully")
+      showToaster(ToastType.success,"Registered successfully");
+      navigate('/SignIn')
     })
-    .catch((err)=>showToaster(ToastType.error , "Unable to send OTP")))})
+    .catch((err)=>showToaster(ToastType.error , "Unable to Register")))})
 
     const sendOTP = values =>{
       props.addTempRegisterDetails({name:"RegData" ,value:{...values , user_type : props.tab === "0"?userType.client:userType.tranporter}});
