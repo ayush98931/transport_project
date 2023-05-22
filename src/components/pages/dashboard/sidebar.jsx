@@ -198,7 +198,7 @@ export default function PersistentDrawerLeft(props) {
       <Main open={open}>
         <DrawerHeader />
         {location.pathname !== '/WorkSpace/'?props.children:(<><Typography variant='h4'>
-          👋 Hey, I am ayush presenting my project on transport management system.
+          👋 Hey, I am Ayush and Isha presenting my project on transport management system.
         </Typography>
         <Typography paragraph>
           This is a dashboard page.
