@@ -72,10 +72,9 @@ export default function MyLoads() {
   };
 
   return (
-        <IsLoggedIn>
+       
     <div>
       <h1>My Loads</h1>
-        </IsLoggedIn>
       <br />
       <Fab variant="extended">
         Listing

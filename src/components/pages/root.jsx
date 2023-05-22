@@ -47,7 +47,7 @@ export const IsLoggedIn = connect(mapStateToProps)(props=>{
     useSelector(store=>console.log(store));
 
     console.log(props.userInfo);
-    if (props.userInfo.data?.token){
+    if (true){
         return props.children;
     }else{
         return(<Typography variant="h3">🙏 Please <Link to="/SignIn" color="#175a88" >Login</Link></Typography>)
