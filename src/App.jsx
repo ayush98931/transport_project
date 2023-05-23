@@ -70,9 +70,23 @@ function App() {
         },
         {
         index:true,
+        path:"MyRoutes",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.MyRoutes />
+                  </Suspense>),
+        },
+        {
+        index:true,
         path:"Marketplace",
         element:(<Suspense fallback={<Loader />}>
                       <lazy.MarketPlace />
+                  </Suspense>),
+        },
+        {
+        index:true,
+        path:"AboutCompany",
+        element:(<Suspense fallback={<Loader />}>
+                      <lazy.AboutPage />
                   </Suspense>),
         },
       ]

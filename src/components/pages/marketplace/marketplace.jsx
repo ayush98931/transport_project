@@ -8,7 +8,10 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
+import { showToaster } from "../../../utility";
+import { ToastType } from "../../../constants";
+import { useNavigate } from "react-router";
 
 const myStyle = {
   backgroundImage:
@@ -25,6 +28,23 @@ const myStyle = {
 };
 
 export default function Marketplace() {
+  const [state , setState] = useState({})
+
+  const navigate = useNavigate();
+  localStorage.setItem("lorry_data" , []);
+
+  const save_lorries = useCallback(()=>{
+    let lorry = JSON.parse(localStorage.getItem("lorry_data"))||null;
+    localStorage.setItem("lorry_data" , JSON.stringify([...lorry , state]));
+    console.log(state);
+    showToaster(ToastType.info , "Lorry Added")
+    navigate('../MyRoutes');
+  }, [state])
+
+
+
+  
+
   return (
     <div>
       <div style={myStyle}>
@@ -36,47 +56,46 @@ export default function Marketplace() {
         <h2>Filter By :</h2>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">LorryType</InputLabel>
-          <Select defaultValue="" id="grouped-select" label="Grouping">
+          <Select defaultValue="" id="lorry" onChange={e=>setState({...state , lorry:e.target.value})} label="Grouping">
             <MenuItem value=""></MenuItem>
             <ListSubheader>Category 1</ListSubheader>
-            <MenuItem value={1}>LCV</MenuItem>
-            <MenuItem value={2}>Truck</MenuItem>
-            <MenuItem value={3}>Container</MenuItem>
+            <MenuItem value={"LCV"}>LCV</MenuItem>
+            <MenuItem value={"Truck"}>Truck</MenuItem>
+            <MenuItem value={"Container"}>Container</MenuItem>
             <ListSubheader>Category 2</ListSubheader>
-            <MenuItem value={4}>Trailer</MenuItem>
-            <MenuItem value={5}>Hyva</MenuItem>
-            <MenuItem value={6}>Tanker</MenuItem>
+            <MenuItem value={"Trailer"}>Trailer</MenuItem>
+            <MenuItem value={"Hyva"}>Hyva</MenuItem>
+            <MenuItem value={"Tanker"}>Tanker</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel htmlFor="grouped-select">Drop Location</InputLabel>
-          <TextField variant="outlined" />
-        </FormControl>
+          <TextField label="Drop Location"
+           variant="outlined" id="drop_location" onChange={e=>setState({...state , drop_location:e.target.value})} />
+    
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">City</InputLabel>
-          <Select defaultValue="" id="grouped-select" label="Grouping">
+          <Select defaultValue="" id="city" onChange={e=>setState({...state , city:e.target.value})} label="Grouping">
             <MenuItem value=""></MenuItem>
-            <MenuItem value={1}>Indore</MenuItem>
-            <MenuItem value={2}>Jabalput</MenuItem>
-            <MenuItem value={3}>Bhopal</MenuItem>
+            <MenuItem value={"Indore"}>Indore</MenuItem>
+            <MenuItem value={"Jabalput"}>Jabalput</MenuItem>
+            <MenuItem value={"Bhopal"}>Bhopal</MenuItem>
             
           </Select>
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel htmlFor="grouped-select">Capacity</InputLabel>
-          <Select defaultValue="" id="grouped-select" label="Grouping">
+          <Select defaultValue="" id="capacity" onChange={e=>setState({...state , capacity:e.target.value})} label="Grouping">
             <MenuItem value=""></MenuItem>
             <ListSubheader>Minimum Quantity</ListSubheader>
-            <MenuItem value={1}>0-5 Ton</MenuItem>
-            <MenuItem value={2}>5-10 Ton</MenuItem>
-            <MenuItem value={3}>10-15 Ton</MenuItem>
-            <MenuItem value={4}>15-20 Ton</MenuItem>
-            <MenuItem value={4}>20-25 Ton</MenuItem>
-            <MenuItem value={4}>25+ Ton</MenuItem>
+            <MenuItem value={"0-5 Ton"}>0-5 Ton</MenuItem>
+            <MenuItem value={"5-10 Ton"}>5-10 Ton</MenuItem>
+            <MenuItem value={"10-15 Ton"}>10-15 Ton</MenuItem>
+            <MenuItem value={"15-20 Ton"}>15-20 Ton</MenuItem>
+            <MenuItem value={"20-25 Ton"}>20-25 Ton</MenuItem>
+            <MenuItem value={"25+ Ton"}>25+ Ton</MenuItem>
           </Select>
         </FormControl>
       </div>
-      <Button variant="contained" > Book Fare</Button>
+      <Button variant="contained" onClick={()=>save_lorries()} > Book Fare</Button>
     </div>
   );
 }

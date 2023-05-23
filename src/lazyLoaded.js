@@ -8,5 +8,7 @@ export const Dashboard = React.lazy(()=> import('./components/pages/dashboard/Da
 export const MyLoads = React.lazy(()=> import('./components/pages/myloads/myloads'));
 export const MyLories = React.lazy(()=> import('./components/pages/mylories/mylories'));
 export const MarketPlace = React.lazy(()=> import('./components/pages/marketplace/marketplace'));
+export const MyRoutes = React.lazy(()=> import('./components/pages/myroutes/myroutes'));
+export const AboutPage = React.lazy(()=> import('./components/pages/aboutpage/aboutpage'));
 
 
